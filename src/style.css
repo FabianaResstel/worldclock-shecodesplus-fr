@@ -1,0 +1,19 @@
+body {
+    background-image: linear-gradient(to top, #30cfd0 0%, #5a229e 100%);
+    ;
+}
+
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #5ce9e9;
+    padding: 20px;
+    box-shadow: 12px 0 24px rgba(0, 0, 0, 0.18);
+
+}
+
+.city {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}

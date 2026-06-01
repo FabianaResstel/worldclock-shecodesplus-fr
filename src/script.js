@@ -14,18 +14,23 @@ function updateTime() {
   secCityTimeElement.innerHTML = secCityMoment.format(
     `h:mm:ss [<small>]A[</small>]`,
   );
+}
 
-  let localCityElement = document.querySelector("#local-city");
-  let localCityDateElement = localCityElement.querySelector(".cityDate");
-  let localCityTimeElement = localCityElement.querySelector(".cityTime");
-  let localCityNameElement = localCityElement.querySelector(".cityName");
-  let localTimezone = moment.tz.guess();
-  let localCityMoment = moment().tz(localTimezone);
-  let cityName = localTimezone.split("/")[1].replace("_", " ");
-  localCityNameElement.innerHTML = cityName;
-  localCityDateElement.innerHTML = localCityMoment.format("MMMM  Do  YYYY");
-  localCityTimeElement.innerHTML = localCityMoment.format(
+function updateCity(event) {
+  let timezone = event.target.value;
+  let cityMoment = moment.tz(timezone);
+  let cityName = timezone.split("/")[1].replace("_", " ");
+
+  let cityElement = document.querySelector("#local-city");
+  cityElement.querySelector(".cityName").innerHTML = cityName;
+  cityElement.querySelector(".cityDate").innerHTML =
+    cityMoment.format("MMMM  Do  YYYY");
+  cityElement.querySelector(".cityTime").innerHTML = cityMoment.format(
     `h:mm:ss [<small>]A[</small>]`,
   );
 }
+
+updateTime();
 setInterval(updateTime, 1000);
+let selectCityElement = document.querySelector("#select-city");
+selectCityElement.addEventListener("change", updateCity);

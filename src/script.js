@@ -18,10 +18,13 @@ function updateTime() {
 
 function updateCity(event) {
   let timezone = event.target.value;
+  if (timezone === "current") {
+    timezone = moment.tz.guess();
+  }
   let cityMoment = moment.tz(timezone);
-  let cityName = timezone.split("/")[1].replace("_", " ");
-
+  let cityName = timezone.split("/").at(-1).replace(/_/g, " ");
   let cityElement = document.querySelector("#local-city");
+
   cityElement.querySelector(".cityName").innerHTML = cityName;
   cityElement.querySelector(".cityDate").innerHTML =
     cityMoment.format("MMMM  Do  YYYY");
@@ -29,8 +32,6 @@ function updateCity(event) {
     `h:mm:ss [<small>]A[</small>]`,
   );
 }
-
-updateTime();
 setInterval(updateTime, 1000);
 let selectCityElement = document.querySelector("#select-city");
 selectCityElement.addEventListener("change", updateCity);
